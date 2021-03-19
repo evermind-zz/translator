@@ -1,5 +1,6 @@
 package de.americanstacker.app.translator;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getCanonicalName();
     private String mUrl = "https://www.deepl.com/de/translator";
     private WebView  mWebView;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mWebView = (WebView) findViewById(R.id.activity_main_webview);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mWebView.loadUrl(mUrl);
+            }
+        });
 
         if (savedInstanceState != null) {
             Log.d(TAG, "restore state");
@@ -32,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
                     view.loadUrl(url);
                     return true;
+                }
+
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    swipeContainer.setRefreshing(false);
                 }
             });
 
