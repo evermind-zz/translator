@@ -2,12 +2,14 @@ package de.americanstacker.app.translator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getCanonicalName();
     private String mUrl = "https://www.deepl.com/de/translator";
     private WebView  mWebView;
 
@@ -17,11 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        mWebView = (WebView) findViewById(R.id.activity_main_webview);
+
         if (savedInstanceState != null) {
+            Log.d(TAG, "restore state");
             mWebView.restoreState(savedInstanceState);
         } else {
-            mWebView = (WebView) findViewById(R.id.activity_main_webview);
             mWebView.setWebViewClient(new WebViewClient());
+            Log.d(TAG, "restore state not possible");
 
             // Enable Javascript
             WebSettings webSettings = mWebView.getSettings();
