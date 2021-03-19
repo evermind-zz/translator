@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
             WebSettings webSettings = mWebView.getSettings();
             webSettings.setJavaScriptEnabled(true);
             webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+
+            swipeContainer.setRefreshing(true);
             mWebView.loadUrl(mUrl);
         }
     }
