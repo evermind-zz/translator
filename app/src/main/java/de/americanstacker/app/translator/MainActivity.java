@@ -25,8 +25,14 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "restore state");
             mWebView.restoreState(savedInstanceState);
         } else {
-            mWebView.setWebViewClient(new WebViewClient());
             Log.d(TAG, "restore state not possible");
+            mWebView.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    view.loadUrl(url);
+                    return true;
+                }
+            });
 
             // Enable Javascript
             WebSettings webSettings = mWebView.getSettings();
