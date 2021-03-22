@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getCanonicalName();
-    private String mUrl = "https://www.deepl.com/de/translator";
+    private String mUrl = BuildConfig.WEBPAGE_URL;
     private WebView  mWebView;
     private SwipeRefreshLayout swipeContainer;
 

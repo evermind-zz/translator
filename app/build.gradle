@@ -12,8 +12,20 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        deepl {
+            applicationId "de.americanstacker.app.translator.deepl"
+            buildConfigField("String", "WEBPAGE_URL", "\"https://www.deepl.com/de/translator\"")
+        }
+        gtranslate {
+            applicationId "de.americanstacker.app.translator.google"
+            buildConfigField("String", "WEBPAGE_URL", "\"https://translate.google.com\"")
         }
     }
 }
